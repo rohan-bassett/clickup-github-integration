@@ -4,6 +4,9 @@ inputs:
   team-id:
     description: 'Team ID'
     required: true
+  status:
+    description: 'Requested Status'
+    required: true    
 outputs:
   time: # id of output
     description: 'The time we greeted you'
