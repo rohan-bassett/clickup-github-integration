@@ -17,6 +17,13 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 try {
+  console.log({payload: _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload});
+
+  const { pull_request } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload;
+
+  console.log({pull_request});
+
+
   const {
     pull_request: {
       head: { ref },

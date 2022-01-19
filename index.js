@@ -3,6 +3,13 @@ import { context } from '@actions/github';
 import fetch from 'node-fetch';
 
 try {
+  console.log({payload: context.payload});
+
+  const { pull_request } = context.payload;
+
+  console.log({pull_request});
+
+
   const {
     pull_request: {
       head: { ref },
