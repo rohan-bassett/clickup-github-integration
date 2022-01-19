@@ -19,32 +19,37 @@ __nccwpck_require__.r(__webpack_exports__);
 try {
   const {
     pull_request: {
-      head: { ref },
+      head: { ref = null },
     },
   } = _actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload;
 
-  const [taskID] = ref.split('/');
+  if (!ref) {
+    const payload = JSON.stringify(github.context.payload, undefined, 2);
+    console.log(`The event payload: ${payload}`);
+  } else {
+    const [taskID] = ref.split('/');
 
-  const status = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('status');
-  const teamID = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('team-id');
+    const status = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('status');
+    const teamID = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('team-id');
 
-  const response = await (0,node_fetch__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .ZP)(
-    `${process.env.CLICKUP_API_URL}/task/${taskID}/?custom_task_ids=true&team_id=${teamID}`,
-    {
-      method: 'PUT',
-      headers: {
-        Authorization: process.env.CLICKUP_API_TOKEN,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        status,
-      }),
-    }
-  );
+    const response = await (0,node_fetch__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .ZP)(
+      `${process.env.CLICKUP_API_URL}/task/${taskID}/?custom_task_ids=true&team_id=${teamID}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: process.env.CLICKUP_API_TOKEN,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          status,
+        }),
+      }
+    );
 
-  const data = await response.json();
+    const data = await response.json();
 
-  console.log({ data });
+    console.log({ data });
+  }
 } catch (error) {
   (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
 }
