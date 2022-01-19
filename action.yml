@@ -1,10 +1,9 @@
 name: 'Update ClickUp Status'
 description: 'Update ClickUp Status'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: false
-    default: 'World'
+  team-id:
+    description: 'Team ID'
+    required: true
 outputs:
   time: # id of output
     description: 'The time we greeted you'
