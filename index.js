@@ -3,7 +3,7 @@ import { context } from '@actions/github';
 import fetch from 'node-fetch';
 
 try {
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
+  const payload = JSON.stringify(context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
 
   const {

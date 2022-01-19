@@ -17,7 +17,7 @@ __nccwpck_require__.r(__webpack_exports__);
 
 
 try {
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
+  const payload = JSON.stringify(_actions_github__WEBPACK_IMPORTED_MODULE_1__.context.payload, undefined, 2);
   console.log(`The event payload: ${payload}`);
 
   const {
