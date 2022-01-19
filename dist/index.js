@@ -8527,7 +8527,7 @@ try {
 
   console.log(`The event payload: ${payload}`);
 
-  console.log({URL, TOKEN, teamID})
+  console.log({ URL, TOKEN, teamID });
 } catch (error) {
   (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed)(error.message);
 }

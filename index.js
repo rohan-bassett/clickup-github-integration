@@ -11,7 +11,7 @@ try {
 
   console.log(`The event payload: ${payload}`);
 
-  console.log({URL, TOKEN, teamID})
+  console.log({ URL, TOKEN, teamID });
 } catch (error) {
   setFailed(error.message);
 }
