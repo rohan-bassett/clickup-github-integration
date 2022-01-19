@@ -1,17 +1,34 @@
 import { getInput, setFailed } from '@actions/core';
 import { context } from '@actions/github';
+import fetch from 'node-fetch';
 
 try {
-  const URL = process.env.CLICKUP_API_URL;
-  const TOKEN = process.env.CLICKUP_API_TOKEN;
+  const {
+    pull_request: {
+      head: { ref },
+    },
+  } = context.payload;
 
+  const [taskID] = ref.split('/');
+
+  const status = getInput('status');
   const teamID = getInput('team-id');
 
-  const payload = JSON.stringify(context.payload, undefined, 2);
+  const response = await fetch(`${process.env.CLICKUP_API_URL}/${taskID}/?custom_task_ids=true&team_id=${teamID}`, {
+    method: 'PUT',
+    headers: {
+      Authorization:
+        process.env.CLICKUP_API_TOKEN,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      status,
+    }),
+  });
 
-  console.log(`The event payload: ${payload}`);
+  const data = await response.json();
 
-  console.log({ URL, TOKEN, teamID });
+  console.log({ data })
 } catch (error) {
   setFailed(error.message);
 }
