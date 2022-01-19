@@ -1,15 +1,17 @@
-import { getInput, setOutput, setFailed } from '@actions/core';
+import { getInput, setFailed } from '@actions/core';
 import { context } from '@actions/github';
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = new Date().toTimeString();
-  setOutput('time', time);
-  // Get the JSON webhook payload for the event that triggered the workflow
+  const URL = process.env.CLICKUP_API_URL;
+  const TOKEN = process.env.CLICKUP_API_TOKEN;
+
+  const teamID = getInput('team-id');
+
   const payload = JSON.stringify(context.payload, undefined, 2);
+
   console.log(`The event payload: ${payload}`);
+
+  console.log({URL, TOKEN, teamID})
 } catch (error) {
   setFailed(error.message);
 }
